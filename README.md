@@ -8,140 +8,143 @@ Vitest, and the Web Speech API.
 [![Deploy](https://github.com/kbyunghak/SpeakFall/actions/workflows/deploy.yml/badge.svg)](https://github.com/kbyunghak/SpeakFall/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-0969da)](https://kbyunghak.github.io/SpeakFall/)
 
-브라우저의 Web Speech API를 이용해 영어 문장과 단어 발음을 연습할 수
-있습니다.
+Practice English sentences and vocabulary through browser-based speech
+recognition and interactive gameplay.
 
 > **Speak. Score. Improve.**
 
-## 주요 기능
+## Features
 
-- 난이도별 영어 문장 발음 연습
-- 음성 인식 결과와 기준 문장의 단어별 비교
-- 발음 정확도 및 틀린 단어 표시
-- 화면에서 떨어지는 단어를 발음하는 게임
-- 점수, 레벨, 생명 및 놓친 단어 기록
-- 영어 발음 학습 자료 제공
+- Practice English sentences at multiple difficulty levels
+- Compare recognized speech with the target sentence word by word
+- View pronunciation accuracy and identify missed words
+- Play a voice-controlled falling-word challenge
+- Track score, level, lives, correct words, and missed words
+- Explore curated English pronunciation resources
 
-## 실행 환경
+## Requirements
 
-- Node.js 20 이상
+- Node.js 20 or later
 - npm
-- 마이크를 사용할 수 있는 최신 Chromium 기반 브라우저 권장
+- A microphone
+- A modern Chromium-based browser is recommended
 
-Web Speech API 지원 범위는 브라우저마다 다릅니다. 음성 인식 기능을
-사용하려면 브라우저의 마이크 권한을 허용해야 합니다.
+Web Speech API support varies by browser. Microphone permission is required to
+use speech recognition.
 
-## 로컬 실행
+## Getting Started
 
 ```bash
 npm ci
 npm start
 ```
 
-개발 서버는 기본적으로 `http://localhost:5173`에서 실행됩니다.
+The development server runs at `http://localhost:5173` by default.
 
-## 테스트와 빌드
+## Testing and Building
 
 ```bash
-# 대화형 테스트
+# Run tests in watch mode
 npm test
 
-# CI용 테스트와 커버리지
+# Run the CI test suite with coverage
 npm run test:ci
 
-# 프로덕션 빌드
+# Create a production build
 npm run build
 
-# 문장·단어 데이터 검증
+# Validate sentence and vocabulary data
 npm run data:validate
 ```
 
-프로덕션 결과물은 `dist/`에 생성됩니다.
+Production files are generated in `dist/`.
 
-## 프로젝트 구조
+## Project Structure
 
 ```text
 src/
 ├─ components/
-│  ├─ common/              공통 UI 컴포넌트
-│  └─ layout/              Header, Footer
-├─ data/                   문장 및 단어 데이터
+│  ├─ common/              Shared UI components
+│  └─ layout/              Header and footer
+├─ data/                   Sentence and vocabulary data
 ├─ pages/
 │  ├─ HomePage/
 │  ├─ PronunciationResourcesPage/
 │  ├─ SentenceGamePage/
 │  └─ VocabularyGamePage/
-├─ services/               Web Speech API 접근
-├─ utils/                  발음 평가 및 게임 계산
-├─ App.js                  라우트와 전체 레이아웃
-├─ App.test.js             앱 통합 테스트
-└─ index.js                React 진입점
+├─ services/               Web Speech API integration
+├─ utils/                  Pronunciation and game calculations
+├─ App.jsx                 Routes and application layout
+├─ App.test.jsx            Application integration tests
+└─ index.jsx               React entry point
 ```
 
-React 컴포넌트는 화면과 상태 조합을 담당하고, 브라우저 API는
-`services/`, React에 의존하지 않는 계산은 `utils/`에 둡니다.
+React components handle presentation and state composition. Browser APIs are
+isolated in `services/`, while framework-independent calculations live in
+`utils/`.
 
-## 데이터
+## Data
 
-`src/data/sentences.json`은 다음 카테고리를 포함합니다.
+`src/data/sentences.json` contains the following categories:
 
 - `beginner`
 - `intermediate`
 - `advanced`
 - `hardWords`
 
-CI에서 각 카테고리가 비어 있지 않고 유효한 문자열만 포함하는지,
-중복 항목이 없는지 검증합니다. 문장을 추가할 때 기존 JSON 구조를
-유지해야 합니다.
+CI verifies that every category is non-empty, contains valid strings, and has
+no duplicate entries. New content must preserve the existing JSON structure.
 
 ## CI/CD
 
-### CI
+### Continuous Integration
 
-`.github/workflows/ci.yml`은 `main` 또는 `master` 브랜치의 push와
-pull request에서 다음 작업을 실행합니다.
+`.github/workflows/ci.yml` runs for pushes and pull requests targeting `main`
+or `master`. It performs the following checks:
 
-1. `npm ci`
-2. 테스트 및 커버리지 생성
-3. 문장·단어 데이터 검증
-4. 프로덕션 빌드
+1. Install dependencies with `npm ci`
+2. Run tests and generate coverage
+3. Validate sentence and vocabulary data
+4. Create a production build
 
-### GitHub Pages 배포
+### GitHub Pages Deployment
 
-`.github/workflows/deploy.yml`은 기본 브랜치 push 또는 수동 실행 시
-테스트와 빌드를 수행한 뒤 `dist/`를 GitHub Pages에 배포합니다.
+`.github/workflows/deploy.yml` runs on pushes to the default branch or through
+manual dispatch. It tests and builds the application, then deploys `dist/` to
+GitHub Pages.
 
-저장소의 **Settings → Pages → Build and deployment → Source**를
-`GitHub Actions`로 설정해야 합니다.
+The repository's **Settings → Pages → Build and deployment → Source** option
+must be set to `GitHub Actions`.
 
-라우팅은 GitHub Pages에서 새로고침 404가 발생하지 않도록
-가벼운 내부 해시 라우팅을 사용합니다.
+SpeakFall uses lightweight hash-based routing to prevent refresh-related 404
+errors on GitHub Pages.
 
-현재 `package.json`의 배포 경로는 다음 저장소명을 기준으로 합니다.
+The current deployment URL is:
 
 ```text
 https://kbyunghak.github.io/SpeakFall/
 ```
 
-저장소 이름을 변경하면 `package.json`의 `homepage`와 README의 배포
-링크도 함께 변경해야 합니다.
+If the repository is renamed, update the `homepage` field in `package.json`,
+the `base` setting in `vite.config.js`, and the links in this README.
 
-## 알려진 제한사항
+## Known Limitations
 
-- 음성 인식 정확도는 브라우저, 마이크 및 주변 소음의 영향을 받습니다.
-- Safari와 Firefox에서는 일부 Web Speech API 기능이 제한될 수 있습니다.
-- 문장 비교는 현재 단어 순서를 기준으로 한 단순 일치 방식입니다.
-- 최신 Vite 기반이므로 구형 브라우저는 별도 legacy 설정이 필요할 수 있습니다.
+- Recognition accuracy depends on the browser, microphone quality, and ambient
+  noise.
+- Some Web Speech API features may be limited in Safari and Firefox.
+- Sentence scoring currently uses ordered word matching.
+- Legacy browsers may require additional Vite compatibility configuration.
 
-## 향후 개선
+## Roadmap
 
-- 문장 콘텐츠의 문법 및 자연스러움 검수
-- 발음 비교 알고리즘 개선
-- 페이지별 컴포넌트 테스트 확대
-- 접근성 및 모바일 레이아웃 개선
-- 브라우저 자동화 기반의 실제 음성 게임 흐름 테스트
+- Review sentence content for grammar and natural phrasing
+- Improve the pronunciation comparison algorithm
+- Expand page-level component test coverage
+- Improve accessibility and mobile layouts
+- Add browser automation for complete voice-game flows
 
-## 기여
+## Contributing
 
-커밋 메시지와 변경 범위 규칙은 [CONTRIBUTING.md](./CONTRIBUTING.md)를
-참고해 주세요.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for commit message and change-scope
+guidelines.
