@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/speakfall/',
+  base: '/SpeakFall/',
   plugins: [react()],
   test: {
     environment: 'jsdom',

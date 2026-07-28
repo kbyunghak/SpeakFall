@@ -4,9 +4,9 @@ Voice-powered English learning game featuring sentence practice, pronunciation
 feedback, and a fast-paced falling-word challenge. Built with React, Vite,
 Vitest, and the Web Speech API.
 
-[![CI](https://github.com/kbyunghak/speakfall/actions/workflows/ci.yml/badge.svg)](https://github.com/kbyunghak/speakfall/actions/workflows/ci.yml)
-[![Deploy](https://github.com/kbyunghak/speakfall/actions/workflows/deploy.yml/badge.svg)](https://github.com/kbyunghak/speakfall/actions/workflows/deploy.yml)
-[![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-0969da)](https://kbyunghak.github.io/speakfall/)
+[![CI](https://github.com/kbyunghak/SpeakFall/actions/workflows/ci.yml/badge.svg)](https://github.com/kbyunghak/SpeakFall/actions/workflows/ci.yml)
+[![Deploy](https://github.com/kbyunghak/SpeakFall/actions/workflows/deploy.yml/badge.svg)](https://github.com/kbyunghak/SpeakFall/actions/workflows/deploy.yml)
+[![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-0969da)](https://kbyunghak.github.io/SpeakFall/)
 
 브라우저의 Web Speech API를 이용해 영어 문장과 단어 발음을 연습할 수
 있습니다.
@@ -120,7 +120,7 @@ pull request에서 다음 작업을 실행합니다.
 현재 `package.json`의 배포 경로는 다음 저장소명을 기준으로 합니다.
 
 ```text
-https://kbyunghak.github.io/speakfall/
+https://kbyunghak.github.io/SpeakFall/
 ```
 
 저장소 이름을 변경하면 `package.json`의 `homepage`와 README의 배포

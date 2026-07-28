@@ -2,7 +2,7 @@
   "name": "speakfall",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kbyunghak.github.io/speakfall/",
+  "homepage": "https://kbyunghak.github.io/SpeakFall/",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
