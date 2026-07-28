@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const headerStyle = {
   backgroundColor: '#1976d2',
@@ -19,12 +18,12 @@ const linkStyle = {
 
 function Header() {
   return (
-    <div style={headerStyle}>
-      <Link to="/" style={linkStyle}>🏠 Home</Link>
-      <Link to="/sentence" style={linkStyle}>🗣 Sentence</Link>
-      <Link to="/voca" style={linkStyle}>🎮 Word Game</Link>
-      <Link to="/pronunciationResources" style={linkStyle}>🧠 Pronunciation Resources</Link>
-    </div>
+    <nav aria-label="Main navigation" style={headerStyle}>
+      <a href="#/" style={linkStyle}>🏠 Home</a>
+      <a href="#/sentence" style={linkStyle}>🗣 Sentence</a>
+      <a href="#/voca" style={linkStyle}>🎮 Word Fall</a>
+      <a href="#/pronunciationResources" style={linkStyle}>🧠 Learning Resources</a>
+    </nav>
   );
 }
 

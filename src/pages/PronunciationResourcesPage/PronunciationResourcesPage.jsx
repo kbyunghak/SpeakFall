@@ -11,7 +11,7 @@ function PronunciationResources() {
         borderRadius: '20px',
         boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
       }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>🔊 Pronunciation Resources</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>🔊 Learning Resources</h2>
 
         <h3>🎯 Practice Tools</h3>
         <ul>

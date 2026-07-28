@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h1>Welcome to the Pronunciation Games!</h1>
+      <h1>SpeakFall</h1>
+      <p>Speak. Score. Improve.</p>
       <div>
-        <Link to="/sentence">
+        <a href="#/sentence">
           <button
             style={{
               padding: '10px 20px',
@@ -19,10 +19,10 @@ function HomePage() {
               margin: '10px'
             }}
           >
-            Speaking Sentence
+            Sentence Practice
           </button>
-        </Link>
-        <Link to="/voca">
+        </a>
+        <a href="#/voca">
           <button
             style={{
               padding: '10px 20px',
@@ -35,11 +35,11 @@ function HomePage() {
               margin: '10px'
             }}
           >
-            Play Word Game
+            Play Word Fall
           </button>
-        </Link>
+        </a>
 
-        <Link to="/pronunciationResources">
+        <a href="#/pronunciationResources">
           <button
             style={{
               padding: '10px 20px',
@@ -52,9 +52,9 @@ function HomePage() {
               margin: '10px'
             }}
           >
-            Pronunciation Resources
+            Learning Resources
           </button>
-        </Link>
+        </a>
       </div>
     </div>
   );
