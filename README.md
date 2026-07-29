@@ -1,150 +1,181 @@
 # SpeakFall
 
-Voice-powered English learning game featuring sentence practice, pronunciation
-feedback, and a fast-paced falling-word challenge. Built with React, Vite,
-Vitest, and the Web Speech API.
+Voice-powered English practice with pronunciation feedback and interactive gameplay.
 
 [![CI](https://github.com/kbyunghak/SpeakFall/actions/workflows/ci.yml/badge.svg)](https://github.com/kbyunghak/SpeakFall/actions/workflows/ci.yml)
-[![Deploy](https://github.com/kbyunghak/SpeakFall/actions/workflows/deploy.yml/badge.svg)](https://github.com/kbyunghak/SpeakFall/actions/workflows/deploy.yml)
-[![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-0969da)](https://kbyunghak.github.io/SpeakFall/)
+[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-1f6feb)](https://kbyunghak.github.io/SpeakFall/)
 
-Practice English sentences and vocabulary through browser-based speech
-recognition and interactive gameplay.
+## Overview
+
+SpeakFall is a browser-based English learning application that combines sentence
+practice, word-level pronunciation feedback, and a voice-controlled falling-word
+challenge.
+
+**Project Type:** Language Learning Web Application
 
 > **Speak. Score. Improve.**
 
-## Features
+## Live Demo
 
-- Practice English sentences at multiple difficulty levels
-- Compare recognized speech with the target sentence word by word
-- View pronunciation accuracy and identify missed words
-- Play a voice-controlled falling-word challenge
-- Track score, level, lives, correct words, and missed words
-- Explore curated English pronunciation resources
+[Open SpeakFall](https://kbyunghak.github.io/SpeakFall/)
 
-## Requirements
+A microphone and speech-recognition permission are required. A modern
+Chromium-based browser provides the most consistent Web Speech API support.
 
-- Node.js 20 or later
-- npm
-- A microphone
-- A modern Chromium-based browser is recommended
+## Problem
 
-Web Speech API support varies by browser. Microphone permission is required to
-use speech recognition.
+Language learners need repeated speaking practice and immediate feedback, but
+traditional vocabulary tools often focus on reading or multiple-choice recall.
+Human pronunciation coaching is also not always available for short, frequent
+practice sessions.
 
-## Getting Started
+## Solution
 
-```bash
-npm ci
-npm start
+SpeakFall uses browser speech recognition to compare spoken input with target
+sentences, identify matched and missed words, calculate practice feedback, and
+reinforce vocabulary through a fast-paced voice game.
+
+## Key Features
+
+- English sentence practice at multiple difficulty levels.
+- Word-by-word comparison between recognized and target speech.
+- Pronunciation accuracy and missed-word feedback.
+- Voice-controlled falling-word vocabulary challenge.
+- Score, level, lives, correct-word, and missed-word tracking.
+- Curated pronunciation-learning resources.
+- Automated validation for sentence and vocabulary data.
+- Responsive GitHub Pages deployment.
+
+## How It Works
+
+### Learning Flow
+
+```mermaid
+flowchart TD
+    Lesson["Select Lesson"] --> Recording["Speech Recording"]
+    Recording --> Evaluation["Pronunciation Evaluation"]
+    Evaluation --> Feedback["Feedback"]
+    Feedback --> Progress["Progress or Next Challenge"]
 ```
 
-The development server runs at `http://localhost:5173` by default.
+1. Select a sentence level or vocabulary challenge.
+2. Grant microphone access and speak the displayed content.
+3. The Web Speech API returns recognized text.
+4. Framework-independent scoring utilities compare words in order.
+5. The interface displays accuracy, missed words, and game progress.
 
-## Testing and Building
+## Architecture
 
-```bash
-# Run tests in watch mode
-npm test
-
-# Run the CI test suite with coverage
-npm run test:ci
-
-# Create a production build
-npm run build
-
-# Validate sentence and vocabulary data
-npm run data:validate
+```mermaid
+flowchart TD
+    React["React Interface"] --> Speech["Web Speech API Service"]
+    Speech --> Scoring["Scoring Utilities"]
+    Data["Validated Lesson Data"] --> React
+    Scoring --> Feedback["Feedback and Game State"]
+    Feedback --> Progress["Session Progress"]
 ```
 
-Production files are generated in `dist/`.
+React components manage presentation and state composition. Browser APIs are
+isolated in `services/`, while scoring and game calculations remain in `utils/`
+for direct testing.
+
+## Tech Stack
+
+| Area | Technology |
+| --- | --- |
+| UI | React 19 |
+| Build | Vite |
+| Speech | Web Speech API |
+| Testing | Vitest, React Testing Library, coverage-v8 |
+| Data | Validated JSON sentence and vocabulary content |
+| Delivery | GitHub Actions, GitHub Pages |
 
 ## Project Structure
 
 ```text
-src/
-├─ components/
-│  ├─ common/              Shared UI components
-│  └─ layout/              Header and footer
-├─ data/                   Sentence and vocabulary data
-├─ pages/
-│  ├─ HomePage/
-│  ├─ PronunciationResourcesPage/
-│  ├─ SentenceGamePage/
-│  └─ VocabularyGamePage/
-├─ services/               Web Speech API integration
-├─ utils/                  Pronunciation and game calculations
-├─ App.jsx                 Routes and application layout
-├─ App.test.jsx            Application integration tests
-└─ index.jsx               React entry point
+SpeakFall/
+├── src/
+│   ├── components/    Shared UI and layout components
+│   ├── data/          Sentence and vocabulary data
+│   ├── pages/         Home, resources, sentence, and vocabulary games
+│   ├── services/      Web Speech API integration
+│   ├── utils/         Pronunciation and game calculations
+│   ├── App.jsx        Routes and application composition
+│   └── App.test.jsx   Application integration tests
+├── scripts/           Data validation
+├── public/            Static assets
+└── README.md
 ```
 
-React components handle presentation and state composition. Browser APIs are
-isolated in `services/`, while framework-independent calculations live in
-`utils/`.
+## Current Status
 
-## Data
+- Public GitHub Pages application is available.
+- Sentence practice, speech recognition, word comparison, and feedback are working.
+- The falling-word voice game and score tracking are implemented.
+- CI validates tests, coverage, learning data, and the production build.
+- Pronunciation scoring is intentionally lightweight and remains an improvement area.
 
-`src/data/sentences.json` contains the following categories:
+## Getting Started
 
-- `beginner`
-- `intermediate`
-- `advanced`
-- `hardWords`
+Requirements: Node.js 20 or later, npm, a microphone, and a supported browser.
 
-CI verifies that every category is non-empty, contains valid strings, and has
-no duplicate entries. New content must preserve the existing JSON structure.
+```bash
+git clone https://github.com/kbyunghak/SpeakFall.git
+cd SpeakFall
+npm ci
+npm start
+```
+
+The development server uses `http://localhost:5173` by default.
+
+Create and preview a production build:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Testing
+
+```bash
+npm test
+npm run test:ci
+npm run data:validate
+npm run build
+```
+
+The CI test command generates coverage, while data validation checks that required
+categories contain valid, unique learning content.
 
 ## CI/CD
 
-### Continuous Integration
+For pushes and pull requests targeting `main` or `master`, the CI workflow installs
+dependencies, runs tests with coverage, validates learning data, and creates a
+production build. The deployment workflow repeats the quality checks and publishes
+`dist/` to GitHub Pages.
 
-`.github/workflows/ci.yml` runs for pushes and pull requests targeting `main`
-or `master`. It performs the following checks:
+## Documentation
 
-1. Install dependencies with `npm ci`
-2. Run tests and generate coverage
-3. Validate sentence and vocabulary data
-4. Create a production build
-
-### GitHub Pages Deployment
-
-`.github/workflows/deploy.yml` runs on pushes to the default branch or through
-manual dispatch. It tests and builds the application, then deploys `dist/` to
-GitHub Pages.
-
-The repository's **Settings → Pages → Build and deployment → Source** option
-must be set to `GitHub Actions`.
-
-SpeakFall uses lightweight hash-based routing to prevent refresh-related 404
-errors on GitHub Pages.
-
-The current deployment URL is:
-
-```text
-https://kbyunghak.github.io/SpeakFall/
-```
-
-If the repository is renamed, update the `homepage` field in `package.json`,
-the `base` setting in `vite.config.js`, and the links in this README.
-
-## Known Limitations
-
-- Recognition accuracy depends on the browser, microphone quality, and ambient
-  noise.
-- Some Web Speech API features may be limited in Safari and Firefox.
-- Sentence scoring currently uses ordered word matching.
-- Legacy browsers may require additional Vite compatibility configuration.
+- [Contributing and Commit Guidelines](CONTRIBUTING.md)
+- [Shared README Standard](https://github.com/kbyunghak/Portfolio/blob/master/docs/README_STANDARD.md)
+- [Shared Commit Standard](https://github.com/kbyunghak/Portfolio/blob/master/docs/COMMIT_STANDARD.md)
 
 ## Roadmap
 
-- Review sentence content for grammar and natural phrasing
-- Improve the pronunciation comparison algorithm
-- Expand page-level component test coverage
-- Improve accessibility and mobile layouts
-- Add browser automation for complete voice-game flows
+- Review sentence content for grammar and natural phrasing.
+- Improve the pronunciation comparison algorithm.
+- Expand page-level component test coverage.
+- Improve accessibility and mobile layouts.
+- Add browser automation for complete voice-game flows.
 
-## Contributing
+## Limitations
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for commit message and change-scope
-guidelines.
+- Recognition accuracy depends on browser support, microphone quality, and noise.
+- Some Web Speech API features are limited in Safari and Firefox.
+- Sentence scoring currently uses ordered word matching rather than phoneme analysis.
+- Microphone permission is required for core speech features.
+
+## License
+
+No license file is currently provided. All rights are reserved unless a license is
+added explicitly.
